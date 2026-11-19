@@ -14,8 +14,11 @@ jobs:
   python:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        python: ['3.9', '3.13']
+        # GitHub's current image has no 3.9 (end of life); the platform
+        # repo's sdk workflow still tests it on its own runner.
+        python: ['3.10', '3.13']
     defaults:
       run:
         working-directory: python
@@ -32,6 +35,7 @@ jobs:
   typescript:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node: ['18', '22']
     defaults:
