@@ -1,0 +1,276 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Pulzar API",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/v1/openapi.yaml": {
+      "get": {
+        "operationId": "getOpenApiYaml",
+        "x-required-scope": null,
+        "responses": {
+          "200": {
+            "description": "The OpenAPI 3.1 document, as maintained.",
+            "content": {
+              "application/yaml": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/me": {
+      "get": {
+        "operationId": "getMe",
+        "x-required-scope": "any",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ActiveOrg"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The caller.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/devices/{devEui}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/DevEui"
+        }
+      ],
+      "get": {
+        "operationId": "getDevice",
+        "x-required-scope": "devices:read",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ActiveOrg"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The device.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/data/devices/health": {
+      "get": {
+        "operationId": "listDeviceHealth",
+        "x-required-scope": "devices:read",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ActiveOrg"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Health by device.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/devices/{devEui}/downlinks": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/DevEui"
+        }
+      ],
+      "post": {
+        "operationId": "enqueueDownlink",
+        "x-required-scope": "downlinks:write",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ActiveOrg"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {}
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Queued.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/readings": {
+      "get": {
+        "operationId": "getReadingSeries",
+        "x-required-scope": "data:read",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ActiveOrg"
+          },
+          {
+            "name": "quantity",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "channel",
+            "in": "query"
+          },
+          {
+            "name": "from",
+            "in": "query"
+          },
+          {
+            "name": "interval",
+            "in": "query"
+          },
+          {
+            "name": "aggregate",
+            "in": "query"
+          },
+          {
+            "name": "groupBy",
+            "in": "query"
+          },
+          {
+            "name": "devices",
+            "in": "query"
+          },
+          {
+            "name": "applicationId",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The series. Empty `series` when no device maps the quantity.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/device-types/{deviceTypeId}/datasheets": {
+      "parameters": [
+        {
+          "name": "deviceTypeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "operationId": "uploadDatasheet",
+        "x-required-scope": "device-types:write",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ActiveOrg"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {}
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Attached.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/events/stream": {
+      "get": {
+        "operationId": "streamEvents",
+        "x-required-scope": "data:read",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ActiveOrg"
+          },
+          {
+            "name": "after",
+            "in": "query"
+          },
+          {
+            "name": "Last-Event-ID",
+            "in": "header"
+          },
+          {
+            "name": "types",
+            "in": "query"
+          },
+          {
+            "name": "subject",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An event stream.",
+            "content": {
+              "text/event-stream": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webhooks": {
+      "get": {
+        "operationId": "listWebhooks",
+        "x-required-scope": "webhooks:read",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ActiveOrg"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Endpoints.",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "ActiveOrg": {
+        "name": "X-Active-Org",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "usc"
+        }
+      },
+      "DevEui": {
+        "name": "devEui",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{16}$",
+          "example": "a84041000181c061"
+        }
+      }
+    }
+  }
+}

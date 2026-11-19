@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pulzr"
+dynamic = ["version"]
+description = "Python client for the Pulzar API"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Pulzar", email = "joseph@pulzr.net" }]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["pulzar", "pulzr", "iot", "lorawan", "sensors", "api"]
+dependencies = ["httpx>=0.23,<1", "tenacity>=8.2,<10"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Intended Audience :: Developers",
+    "Topic :: Internet",
+    "Typing :: Typed",
+]
+
+[project.optional-dependencies]
+# pulzr.mqtt.Session. The topic and payload helpers need nothing.
+mqtt = ["paho-mqtt>=2,<3"]
+
+
+[project.scripts]
+pulzr = "pulzr.cli:main"
+
+[project.urls]
+Homepage = "https://pulzr.net"
+Documentation = "https://app.pulzr.net/docs/sdks"
+Source = "https://github.com/pulzar-net/pulzr-sdk"
+Issues = "https://github.com/pulzar-net/pulzr-sdk/issues"
+
+[tool.hatch.version]
+path = "src/pulzr/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pulzr"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/pulzr", "tests", "README.md", "LICENSE"]

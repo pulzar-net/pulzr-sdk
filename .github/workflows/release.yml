@@ -1,0 +1,79 @@
+# In pulzar-net/pulzr-sdk only. A tag publishes one package:
+#   python-v<version>      -> PyPI   pulzr
+#   typescript-v<version>  -> npm    @pulzr/sdk
+# The platform repo's SDK mirror workflow pushes the tag when sdk/ gets a new
+# version. Both registries trust this workflow by name (trusted publishing),
+# so no token is stored anywhere: PyPI's trusted publisher and npm's are set
+# to owner pulzar-net, repository pulzr-sdk, workflow release.yml, and the
+# environment named below.
+name: Release
+
+on:
+  push:
+    tags: ['python-v*', 'typescript-v*']
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    if: startsWith(github.ref_name, 'python-v')
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write
+    defaults:
+      run:
+        working-directory: python
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: The tag names the package's version
+        run: |
+          version=$(python -c "import re; print(re.search(r\"__version__ = '([^']+)'\", open('src/pulzr/_version.py').read()).group(1))")
+          test "python-v$version" = "$GITHUB_REF_NAME" || { echo "::error::$GITHUB_REF_NAME, but the package says $version"; exit 1; }
+      - run: pip install httpx tenacity pyyaml build
+      - run: python -m unittest discover -s tests
+        env:
+          PYTHONPATH: src
+      - run: python -m build
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: python/dist
+          skip-existing: true   # a re-run after a version is out is not a failure
+
+  typescript:
+    if: startsWith(github.ref_name, 'typescript-v')
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    defaults:
+      run:
+        working-directory: typescript
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+      # Trusted publishing needs npm 11.5.1 or later; Node 22 ships npm 10.
+      - run: npm install -g npm@11.21.2
+      - name: The tag names the package's version
+        run: |
+          version=$(node -p "require('./package.json').version")
+          test "typescript-v$version" = "$GITHUB_REF_NAME" || { echo "::error::$GITHUB_REF_NAME, but the package says $version"; exit 1; }
+      - run: npm ci
+      - run: npm test
+      # npm adds a trusted publisher only to a package that exists, so the
+      # first version was published by hand; a version already out is skipped.
+      - run: |
+          if npm view "$(node -p "require('./package.json').name")@$(node -p "require('./package.json').version")" version >/dev/null 2>&1; then
+            echo "::notice::This version is already on npm"
+          else
+            npm publish
+          fi
