@@ -24,7 +24,7 @@ export interface Gateway {
   name: string;
   model: string | null;
   radios: Array<'lorawan' | 'ble'>;
-  management: 'parkezeos' | 'kgateway' | null;
+  management: 'parkezeos' | 'package' | null;
   firmware: string | null;
   orgAlias: string | null;
   orgName: string | null;
