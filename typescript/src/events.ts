@@ -31,6 +31,7 @@ export const EVENT_TYPES = [
   'agent.finding',
   'agent.action_requested',
   'firmware.deployment_finished',
+  'billing.internet_threshold',
 ] as const;
 
 export type EventType = (typeof EVENT_TYPES)[number];
@@ -167,6 +168,19 @@ export interface EventDataMap {
     devices: { total: number; completed: number; failed: number };
     /** At most 100; `devices.failed` is the full count. */
     failures: Array<{ devEui: string; stage: FirmwareDeviceStage; error: string }>;
+  };
+  /** Once per threshold per billing month. Nothing is cut off or charged. */
+  'billing.internet_threshold': {
+    period: { start: string; end: string };
+    threshold: 80 | 100;
+    /** Ethernet and WiFi bytes this month; cellular is on the SIM's own line. */
+    usedBytes: number;
+    allowanceBytes: number;
+    /** Decimal strings. */
+    overGb: string;
+    overageAmount: string;
+    currency: string;
+    charged: false;
   };
 }
 
