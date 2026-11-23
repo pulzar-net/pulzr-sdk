@@ -1,6 +1,6 @@
-# Pulzar SDKs
+# Pulzr SDKs
 
-Clients for the [Pulzar](https://pulzr.net) API: devices, readings, events,
+Clients for the [Pulzr](https://pulzr.net) API: devices, readings, events,
 webhooks, gateways, onboarding and agents.
 
 | | Package | Install | Source |
@@ -33,7 +33,7 @@ which the server generates from its own signing code.
 
 ## This repository
 
-It is a copy of `sdk/` in Pulzar's platform repository, updated on every
+It is a copy of `sdk/` in Pulzr's platform repository, updated on every
 change there, so the SDKs are versioned and tested with the API they call.
 Issues are welcome here; a pull request is read here and applied there.
 

@@ -77,7 +77,7 @@ def construct_event(secret: Secret, body: Body, header: Optional[str],
 
 def sign(secret: Secret, body: Body, timestamp: Optional[int] = None) -> str:
     """A signature header for `body`, as the server makes one. For testing a
-    receiver; production deliveries are signed by Pulzar."""
+    receiver; production deliveries are signed by Pulzr."""
     timestamp = int(timestamp if timestamp is not None else time.time())
     payload = _bytes(body)
     return f't={timestamp},' + ','.join(f'v1={_mac(s, timestamp, payload)}'

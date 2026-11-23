@@ -500,7 +500,7 @@ def _globals(parser: argparse.ArgumentParser, suppress: bool) -> None:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = _Parser(prog='pulzr', description='Pulzar from the command line.')
+    parser = _Parser(prog='pulzr', description='Pulzr from the command line.')
     parser.add_argument('--version', action='version', version=f'pulzr {__version__}')
     _globals(parser, suppress=False)
     top = parser.add_subparsers(dest='command', metavar='<command>', parser_class=_Parser)

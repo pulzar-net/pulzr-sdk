@@ -1,6 +1,6 @@
 # @pulzr/sdk
 
-TypeScript client for the Pulzar API. ESM, no runtime dependencies, uses the global `fetch`: Node 18+, browsers, Deno, Bun, Workers.
+TypeScript client for the Pulzr API. ESM, no runtime dependencies, uses the global `fetch`: Node 18+, browsers, Deno, Bun, Workers.
 
 Full documentation: https://app.pulzr.net/docs
 

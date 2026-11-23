@@ -50,7 +50,7 @@ export interface SolvedPosition {
   method: 'tdoa' | 'rssi' | 'centroid';
   time: string;
   uplinks: number;
-  /** Every gateway the solve used: Pulzar-operated or the org's own, never another org's. */
+  /** Every gateway the solve used: Pulzr-operated or the org's own, never another org's. */
   gateways: Array<{ gatewayId: string; operator: 'parkeze' | 'org'; rssi: number; snr: number | null; fineTimestamp: boolean }>;
 }
 
@@ -177,7 +177,7 @@ export class Coverage {
     return this.core.request('GET', '/api/v1/coverage/at', { ...opts, query: { latitude, longitude } });
   }
 
-  /** The public layer: Pulzar-operated gateways only, from orgs that share. No key needed. */
+  /** The public layer: Pulzr-operated gateways only, from orgs that share. No key needed. */
   public(bbox: Bbox, query: { resolution?: 6 | 7 | 8 } = {}, opts: Opts = {}): Promise<CoverageCollection> {
     return this.core.request('GET', '/api/v1/public/coverage', {
       ...opts, query: { ...query, bbox: bbox.join(',') },

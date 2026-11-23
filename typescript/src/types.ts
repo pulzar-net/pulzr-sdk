@@ -269,7 +269,7 @@ export interface DeviceType {
   configSchema: Json | null;
   commands: Json[];
   transport: 'lorawan' | 'ble';
-  /** Its own JavaScript, or a payload format whose decoder Pulzar ships. */
+  /** Its own JavaScript, or a payload format whose decoder Pulzr ships. */
   decoder: 'javascript' | 'cayenne_lpp';
   bleEmit: Json | null;
   bleConfig: Json | null;

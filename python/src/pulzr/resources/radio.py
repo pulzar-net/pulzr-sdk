@@ -49,7 +49,7 @@ class Coverage(Resource):
         return self._client.request('PUT', '/api/v1/coverage/settings', json={'public': public})
 
     def public(self, bbox: Sequence[float], *, resolution: Optional[int] = None) -> Dict[str, Any]:
-        """The public layer: Pulzar-operated gateways only, from orgs that share."""
+        """The public layer: Pulzr-operated gateways only, from orgs that share."""
         return self._client.request('GET', '/api/v1/public/coverage', params={
             'bbox': ','.join(str(v) for v in bbox), 'resolution': resolution})
 

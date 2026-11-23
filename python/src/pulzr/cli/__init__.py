@@ -1,4 +1,4 @@
-"""`pulzr`, the command line for Pulzar.
+"""`pulzr`, the command line for Pulzr.
 
 Built on the SDK in this package, not beside it: every hand-written verb is a
 call to a resource method, so paging, retries, the error classes and the

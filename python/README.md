@@ -1,6 +1,6 @@
 # pulzr
 
-Python client for the Pulzar API. Python 3.9+, two dependencies (`httpx` and `tenacity`).
+Python client for the Pulzr API. Python 3.9+, two dependencies (`httpx` and `tenacity`).
 
 Full documentation: https://app.pulzr.net/docs
 

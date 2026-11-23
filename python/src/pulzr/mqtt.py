@@ -45,7 +45,7 @@ def client_id_for(api_key: str, name: Optional[str] = None) -> str:
     """
     prefix = api_key[:12]
     if not re.fullmatch(r'pzk_[0-9a-f]{8}', prefix):
-        raise ValueError('Not a Pulzar API key: expected pzk_<8 hex>_...')
+        raise ValueError('Not a Pulzr API key: expected pzk_<8 hex>_...')
     if name and name.startswith(prefix):
         return name
     return f'{prefix}-{name or secrets.token_hex(6)}'

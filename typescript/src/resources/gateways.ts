@@ -113,7 +113,7 @@ export class Gateways {
     return this.core.request('GET', `/api/v1/gateway-ops/${seg(gatewayId)}/status`, opts);
   }
 
-  /** Which network its tunnel and SIM are on: the org's own or Pulzar's. Never touches the gateway. */
+  /** Which network its tunnel and SIM are on: the org's own or Pulzr's. Never touches the gateway. */
   network(gatewayId: string, opts: Opts = {}): Promise<GatewayNetwork> {
     return this.core.request('GET', `/api/v1/gateways/${seg(gatewayId)}/network`, opts);
   }

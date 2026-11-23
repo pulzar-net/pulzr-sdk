@@ -33,7 +33,7 @@ export class Mqtt {
 export function mqttClientId(apiKey: string, name?: string): string {
   const prefix = apiKey.slice(0, 12);
   if (!/^pzk_[0-9a-f]{8}$/.test(prefix)) {
-    throw new Error('Not a Pulzar API key: expected pzk_<8 hex>_...');
+    throw new Error('Not a Pulzr API key: expected pzk_<8 hex>_...');
   }
   if (name && name.startsWith(prefix)) return name;
   return `${prefix}-${name || randomSuffix()}`;

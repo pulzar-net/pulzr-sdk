@@ -1,4 +1,4 @@
-"""Python client for the Pulzar API. https://app.pulzr.net/docs"""
+"""Python client for the Pulzr API. https://app.pulzr.net/docs"""
 
 from . import mqtt, types, webhooks
 from ._client import DEFAULT_BASE_URL, Client

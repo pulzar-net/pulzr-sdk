@@ -1,7 +1,7 @@
 {
   "name": "@pulzr/sdk",
   "version": "0.1.0",
-  "description": "TypeScript client for the Pulzar API: devices, readings, events, webhooks, onboarding and agents.",
+  "description": "TypeScript client for the Pulzr API: devices, readings, events, webhooks, onboarding and agents.",
   "license": "MIT",
   "homepage": "https://app.pulzr.net/docs/sdks",
   "repository": {

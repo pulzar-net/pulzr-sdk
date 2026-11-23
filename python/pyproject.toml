@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "pulzr"
 dynamic = ["version"]
-description = "Python client for the Pulzar API"
+description = "Python client for the Pulzr API"
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [{ name = "Pulzar", email = "joseph@pulzr.net" }]

@@ -12,7 +12,7 @@ _BASE = '/api/v1/device-types'
 
 class DeviceTypes(Resource):
     def list(self) -> List[Dict[str, Any]]:
-        """Every type Pulzar publishes plus the org's own."""
+        """Every type Pulzr publishes plus the org's own."""
         return self._client.request('GET', _BASE)['result']
 
     def versions(self, device_type_id: str) -> List[Dict[str, Any]]:

@@ -5,7 +5,7 @@ import { seg } from '../util.js';
 export class DeviceTypes {
   constructor(private readonly core: Core) {}
 
-  /** This org's types and the ones Pulzar publishes. */
+  /** This org's types and the ones Pulzr publishes. */
   async list(opts: { signal?: AbortSignal } = {}): Promise<DeviceType[]> {
     const page = await this.core.request<{ result: DeviceType[] }>('GET', '/api/v1/device-types', opts);
     return page.result;

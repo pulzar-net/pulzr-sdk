@@ -18,7 +18,7 @@ DEFAULT_BASE_URL = 'https://app.pulzr.net'
 
 
 def env(name: str, environ=None) -> Optional[str]:
-    """`PULZR_<X>` from the environment, or `PARKEZE_<X>`, the name before Pulzar."""
+    """`PULZR_<X>` from the environment, or `PARKEZE_<X>`, the name before Pulzr."""
     environ = os.environ if environ is None else environ
     return environ.get(name) or environ.get('PARKEZE_' + name[len('PULZR_'):])
 DEFAULT_TIMEOUT = 30.0
@@ -71,7 +71,7 @@ def decode(response: httpx.Response) -> Any:
 
 
 class Client:
-    """A Pulzar API client.
+    """A Pulzr API client.
 
         client = pulzr.Client(api_key='pzk_...')
 

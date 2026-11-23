@@ -46,7 +46,7 @@ class Gateways(Resource):
 
     def network(self, gateway_id: str) -> Dict[str, Any]:
         """Which network its tunnel and SIM are on: the org's own or
-        Pulzar's. Never touches the gateway."""
+        Pulzr's. Never touches the gateway."""
         return self._client.request('GET', path('/api/v1/gateways', gateway_id, 'network'))
 
     def sim(self, gateway_id: str) -> Dict[str, Any]:
@@ -65,7 +65,7 @@ class Gateways(Resource):
 
     def update_firmware(self, gateway_id: str, tag: str, *,
                         over_cellular: bool = False) -> Dict[str, Any]:
-        """Install a PulzarOS release. On a SIM, `over_cellular` must say so."""
+        """Install a PulzrOS release. On a SIM, `over_cellular` must say so."""
         return self._client.request('POST', path('/api/v1/gateway-ops', gateway_id, 'firmware'),
                                     json={'tag': tag, 'overCellular': over_cellular})
 
