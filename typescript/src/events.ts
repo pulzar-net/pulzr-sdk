@@ -31,7 +31,7 @@ export const EVENT_TYPES = [
   'agent.finding',
   'agent.action_requested',
   'firmware.deployment_finished',
-  'billing.internet_threshold',
+  'billing.vpn_data_threshold',
 ] as const;
 
 export type EventType = (typeof EVENT_TYPES)[number];
@@ -170,10 +170,10 @@ export interface EventDataMap {
     failures: Array<{ devEui: string; stage: FirmwareDeviceStage; error: string }>;
   };
   /** Once per threshold per billing month. Nothing is cut off or charged. */
-  'billing.internet_threshold': {
+  'billing.vpn_data_threshold': {
     period: { start: string; end: string };
     threshold: 80 | 100;
-    /** Ethernet and WiFi bytes this month; cellular is on the SIM's own line. */
+    /** What the org's VPN devices sent and received through Pulzr's VPN this month. */
     usedBytes: number;
     allowanceBytes: number;
     /** Decimal strings. */
