@@ -44,7 +44,7 @@ BODY = json.dumps(events.envelope(
                    'unit': None, 'field': 'occupied'}],
      'fields': {'TempC_SHT': 21.4, 'occupied': True},
      'radio': {'rssi': -97, 'snr': 7.5, 'gatewayId': '0016c001f1500a5b', 'gatewayCount': 2},
-     'fPort': 2, 'fCnt': 1442, 'time': '2026-10-13T14:02:11.120Z'},
+     'fPort': 2, 'seq': 1442, 'time': '2026-10-13T14:02:11.120Z'},
 ), separators=(',', ':')).encode()
 
 UNICODE = json.dumps({'id': 'evt_x', 'data': {'name': 'Bâtiment Zürich — 東'}},

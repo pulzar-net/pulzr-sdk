@@ -28,7 +28,7 @@ test('watch yields typed events and stops at end', async () => {
     frame('session', { id: 's1', status: 'waiting_for_uplink' }),
     ': tick\n\n',
     frame('join', { devEui: 'a840410000000001', time: '2026-10-13T14:00:00+00:00' }),
-    frame('uplink', { devEui: 'a840410000000001', time: '2026-10-13T14:00:05+00:00', fPort: 1, fCnt: 0,
+    frame('uplink', { devEui: 'a840410000000001', time: '2026-10-13T14:00:05+00:00', fPort: 1, seq: 0,
       rssi: -80, snr: 7.5, data: { temp: 21.4 },
       readings: [{ quantity: 'temperature', channel: null, value: 21.4, unit: '°C', field: 'temp' }] }),
     frame('end', { reason: 'abandoned' }),

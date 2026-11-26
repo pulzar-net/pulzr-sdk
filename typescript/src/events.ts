@@ -73,7 +73,7 @@ export interface EventDataMap {
     fields: Record<string, unknown>;
     radio: { rssi: number | null; snr: number | null; gatewayId: string | null; gatewayCount: number };
     fPort: number | null;
-    fCnt: number | null;
+    seq: number | null;
     time: string | null;
   };
   'device.joined': { device: EventDevice; time: string | null };

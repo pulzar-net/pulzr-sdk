@@ -68,7 +68,7 @@ export interface DeviceDetail {
     rssi: number | null;
     snr: number | null;
     fPort: number | null;
-    fCnt: number | null;
+    seq: number | null;
     gatewayId: string | null;
   } | null;
   fields: Array<{
@@ -630,7 +630,7 @@ export type OnboardingWatchEvent =
         devEui: string;
         time: string;
         fPort: number | null;
-        fCnt: number | null;
+        seq: number | null;
         rssi: number | null;
         snr: number | null;
         data: Json;
